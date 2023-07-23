@@ -14,6 +14,7 @@
  * 
  * <nowiki>
  */
+var logTag = '[wdQs]';
 
 /** API url */
 var wdUrl = (title) => `/w/api.php?action=query&prop=pageprops&ppprop=wikibase_item&redirects=1&format=json&formatversion=2&titles=${title}`;
@@ -45,15 +46,15 @@ class WikidataLinks {
 		for (link of links) {
 			promki.push(this.getShow(link));
 		}
-		console.log('scheduled %d requests', links.length);
+		console.log(logTag, 'scheduled %d requests', links.length);
 		await Promise.all(promki);
-		console.log('done');
+		console.log(logTag, 'done');
 	}
 
 	async getShow(link) {
 		var wd = await getWd(link);
 		this.show(wd);
-		console.log(wd);
+		console.log(logTag, wd);
 	}
 
 	show(wd) {
@@ -63,4 +64,9 @@ class WikidataLinks {
 
 }
 
+// export
+if (typeof module === 'object' && module.exports) {
+	module.exports.WikidataLinks = WikidataLinks;
+	module.exports.logTag = logTag;
+}
 // </nowiki>
