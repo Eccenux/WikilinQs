@@ -1,7 +1,7 @@
 {
 	"name": "wikilinqs",
 	"type": "commonjs",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"scripts": {
 		"test": "mocha",
 		"build": "browserify src/main.js -o WikilinQs.js",

@@ -23,16 +23,17 @@ var wdUrl = (title) => `/w/api.php?action=query&prop=pageprops&ppprop=wikibase_i
  * Main links.
  */
 class WikidataLinks {
+	/** @private get WD id from API. */
 	async getWd(el) {
-		var title = el.href.replace(/.+\.org\/wiki\//, '');
+		let title = el.href.replace(/.+\.org\/wiki\//, '');
 
-		var url = wdUrl(title);
+		let url = wdUrl(title);
 
-		var re = await fetch(url);
-		var data = await re.json();
+		const re = await fetch(url);
+		const data = await re.json();
 		//console.log(data);
 
-		var page = data.query.pages.pop();
+		const page = data.query.pages.pop();
 		return {
 			title: page.title,
 			q: page.pageprops.wikibase_item,
@@ -40,10 +41,13 @@ class WikidataLinks {
 		};
 	}
 
+	/**
+	 * Show WD ids on links.
+	 */
 	async showWd() {
-		var links = document.querySelectorAll('.mw-parser-output a[href^="/wiki"]');
-		var promki = [];
-		for (link of links) {
+		const links = document.querySelectorAll('.mw-parser-output a[href^="/wiki"]');
+		const promki = [];
+		for (const link of links) {
 			promki.push(this.getShow(link));
 		}
 		console.log(logTag, 'scheduled %d requests', links.length);
@@ -51,12 +55,18 @@ class WikidataLinks {
 		console.log(logTag, 'done');
 	}
 
+	/**
+	 * Show WD item for the atricle link.
+	 * 
+	 * @param {Element} link Article link element.
+	 */
 	async getShow(link) {
-		var wd = await getWd(link);
+		const wd = await getWd(link);
 		this.show(wd);
 		console.log(logTag, wd);
 	}
 
+	/** @private Show Q beside link. */
 	show(wd) {
 		wd.el.insertAdjacentHTML('beforebegin', `<div style="display:inline-block">${wd.q}</div> `);
 		return wd;
