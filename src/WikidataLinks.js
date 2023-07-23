@@ -61,7 +61,7 @@ class WikidataLinks {
 	 * @param {Element} link Article link element.
 	 */
 	async getShow(link) {
-		const wd = await getWd(link);
+		const wd = await this.getWd(link);
 		this.show(wd);
 		console.log(logTag, wd);
 	}
