@@ -11,8 +11,6 @@
  * Maciej Nux Jaros
  * 
  * Deployed with love using Wikiploy: [[Wikipedia:Wikiploy]]
- * 
- * <nowiki>
  */
 var logTag = '[wdQs]';
 
@@ -109,4 +107,3 @@ if (typeof module === 'object' && module.exports) {
 	module.exports.WikidataLinks = WikidataLinks;
 	module.exports.logTag = logTag;
 }
-// </nowiki>
