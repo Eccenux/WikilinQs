@@ -1,7 +1,7 @@
 {
 	"name": "wikilinqs",
 	"type": "commonjs",
-	"version": "0.0.4",
+	"version": "1.0.0",
 	"scripts": {
 		"test": "mocha",
 		"build": "browserify src/main.js -o WikilinQs.js",
@@ -12,9 +12,7 @@
 		"browserify": "17.x",
 		"chai": "4.x",
 		"eslint": "8.x",
-		"mocha": "10.x"
-	},
-	"dependencies": {
-		"wikiploy": "1.x"
+		"mocha": "10.x",
+		"wikiploy": "2.x"
 	}
 }

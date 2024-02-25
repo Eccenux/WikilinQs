@@ -3,9 +3,7 @@ WikilinQs
 
 Wiki gadget that shows Wikidata item id (Q) for links.
 
-At the moment you can use it manually:
+Use in your `common.js`:
 ```js
-mw.hook('userjs.wikilinqs.ready').add(function (wdLinks) {
-	wdLinks.showWd();
-});
+importScript('User:Nux/WikilinQs.js');
 ```

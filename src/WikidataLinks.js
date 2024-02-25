@@ -23,8 +23,70 @@ var wdUrl = (title) => `/w/api.php?action=query&prop=pageprops&ppprop=wikibase_i
  * Main links.
  */
 class WikidataLinks {
+	/**
+	 * Read and show all WD ids beside wiki-links.
+	 */
+	async all() {
+		const links = document.querySelectorAll('.mw-parser-output a[href^="/wiki"]');
+		if (!links.length) {
+			return;
+		}
+
+		// CSS
+		this.addStyle();
+
+		// read Q from links and show Q beside them
+		const promki = [];
+		for (const link of links) {
+			promki.push(this.readAndShowQ(link));
+		}
+		console.log(logTag, 'scheduled %d requests', links.length);
+		// wait
+		await Promise.all(promki);
+		console.log(logTag, 'done');
+	}
+
+	/** @private Add CSS. */
+	addStyle() {
+		const styleId = 'wikilinqs-css';
+		if (document.getElementById(styleId)) {
+			console.warn(logTag, 'addStyle repeat');
+			return;
+		}
+		const css = /*css*/`
+			.wikilinqs {
+				display: inline-block;
+				vertical-align: super;
+				font-size: 80%;
+				padding-left: .2em;
+				color: mediumvioletred;
+				background: white;
+			}
+		`;
+		document.body.insertAdjacentHTML('beforeend', `<style id='${styleId}'>${css}</style>`);
+	}
+
+	/**
+	 * Show WD item for the atricle link.
+	 * 
+	 * @private
+	 * 
+	 * @param {Element} link Article link element.
+	 */
+	async readAndShowQ(link) {
+		const wd = await this.readQ(link);
+		this.addQ(wd);
+		console.log(logTag, wd);
+	}
+
+	/** @private Show Q beside link. */
+	addQ(wd) {
+		wd.el.insertAdjacentHTML('afterend', `<div class="wikilinqs">${wd.q}</div>`);
+		return wd;
+	}
+
 	/** @private get WD id from API. */
-	async getWd(el) {
+	async readQ(el) {
 		let title = el.href.replace(/.+\.org\/wiki\//, '');
 
 		let url = wdUrl(title);
@@ -40,38 +102,6 @@ class WikidataLinks {
 			el: el,
 		};
 	}
-
-	/**
-	 * Show WD ids on links.
-	 */
-	async showWd() {
-		const links = document.querySelectorAll('.mw-parser-output a[href^="/wiki"]');
-		const promki = [];
-		for (const link of links) {
-			promki.push(this.getShow(link));
-		}
-		console.log(logTag, 'scheduled %d requests', links.length);
-		await Promise.all(promki);
-		console.log(logTag, 'done');
-	}
-
-	/**
-	 * Show WD item for the atricle link.
-	 * 
-	 * @param {Element} link Article link element.
-	 */
-	async getShow(link) {
-		const wd = await this.getWd(link);
-		this.show(wd);
-		console.log(logTag, wd);
-	}
-
-	/** @private Show Q beside link. */
-	show(wd) {
-		wd.el.insertAdjacentHTML('beforebegin', `<div style="display:inline-block">${wd.q}</div> `);
-		return wd;
-	}
-
 }
 
 // export

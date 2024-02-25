@@ -5,14 +5,14 @@
 	"skipSwitchToOutput": false,
 	"skipErrorMessage": true,
 	"commands": [
-		{
-			"text": "test",
-			"tooltip": "Run mocha tests.",
-			"color": "lightgreen",
-			"commandType": "script",
-			"command": "test",
-			"priority": 0
-		},
+		// {
+		// 	"text": "test",
+		// 	"tooltip": "Run mocha tests.",
+		// 	"color": "lightgreen",
+		// 	"commandType": "script",
+		// 	"command": "test",
+		// 	"priority": 0
+		// },
 		{
 			"text": "build",
 			"tooltip": "Run the browserify build.",
