@@ -25,7 +25,7 @@ class WikidataLinks {
 	 * Read and show all WD ids beside wiki-links.
 	 */
 	async all() {
-		const links = document.querySelectorAll('.mw-parser-output a[href^="/wiki"]');
+		const links = document.querySelectorAll('.mw-parser-output a[rel="mw:WikiLink"], .mw-parser-output a[href^="/wiki"]');
 		if (!links.length) {
 			return;
 		}

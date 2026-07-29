@@ -1,25 +1,20 @@
 WikilinQs
 ==========================
 
-Wiki gadget that shows Wikidata item id (Q) for links.
+Wiki gadget that shows the Wikidata item ID (Q) for all links in a Wikipedia article. You trigger it from the Tools menu: "🇶 Show WD-Q".
 
 ## Install
-Use in your [your en.wiki common.js](https://en.wikipedia.org/wiki/Special:MyPage/common.js):
+You could install the gadget locally (on Wikipedia), but it's probably best to do it by editing [your global.js on Meta](https://meta.wikimedia.org/wiki/Special:MyPage/global.js):
 ```js
 if ( mw.config.get('wgNamespaceNumber') === 0 ) {
-	importScript('User:Nux/WikilinQs.js');
-}
-```
-
-Or in [your global.js](https://meta.wikimedia.org/wiki/Special:MyPage/global.js):
-```js
-if ( mw.config.get('wgNamespaceNumber') === 0 ) {
-	importScript('User:Nux/WikilinQs.js');
+	importScript('meta:User:Nux/WikilinQs.js');
 }
 ```
 
 ## Example
 
-https://en.wikipedia.org/wiki/Sport_Wales_National_Centre
+Article: https://en.wikipedia.org/wiki/Sport_Wales_National_Centre
 
 <img src="https://raw.githubusercontent.com/Eccenux/WikilinQs/main/assets/screen.png" alt=" " />
+
+Notice how Qids are shown beside links.
